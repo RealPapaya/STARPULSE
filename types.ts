@@ -34,6 +34,7 @@ export interface CelebrityData {
     views?: string;
     sales?: string;
     followers?: string;
+    awards?: string;
   };
   basicInfo: {
     age: string;

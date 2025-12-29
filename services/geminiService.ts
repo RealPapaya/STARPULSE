@@ -31,9 +31,9 @@ export const fetchCelebrityData = async (name: string): Promise<CelebrityData> =
     contents: `對人物 "${name}" 進行極度嚴苛的數據檢索與【全球權威指數 / TIER INDEX】評分。
     
     【評分量尺定義 - 絕對全球化標準】:
-    1. 【6.5 分：全球知名起點】: 
+    1. 【6.0 分：全球知名起點】: 
        - 該人物必須在多個不同文化/語系區域（如歐美、亞洲、拉美）具備基本辨識度。
-       - 若影響力僅限於單一區域（如僅限台灣、僅限華語圈），則不可超過 6.5。
+       - 若影響力僅限於單一區域（如僅限台灣、僅限華語圈），即便在該區域是頂流，評分也絕對不可超過 6.0。
     
     2. 【8.0 分：全球極度有名】: 
        - 這是極高的門檻。代表在全世界任何主流國家隨機詢問，多數人都能立刻反應其作品或形象。
@@ -67,7 +67,8 @@ export const fetchCelebrityData = async (name: string): Promise<CelebrityData> =
             properties: {
               views: { type: Type.STRING, description: "核心正式作品之平均效率數據 (Average efficiency)" },
               sales: { type: Type.STRING, description: "領銜主演全球總票房或正式專輯實銷" },
-              followers: { type: Type.STRING, description: "全球跨語系認知度規模" }
+              followers: { type: Type.STRING, description: "全球跨語系認知度規模" },
+              awards: { type: Type.STRING, description: "簡短的全球權威獎項統計摘要 (如: 3 Oscar, 12 Grammy)" }
             }
           },
           basicInfo: {

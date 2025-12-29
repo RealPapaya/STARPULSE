@@ -14,70 +14,53 @@ const STAR_RANKS = [
   { range: [4.0, 5.0], title: '三流藝人' },
   { range: [5.0, 6.0], title: '二流藝人' },
   { range: [6.0, 7.0], title: '一流藝人' },
-  { range: [7.0, 8.0], title: '頂流藝人' },
+  { range: [7.0, 8.0], title: '頂尖藝人' },
   { range: [8.0, 9.0], title: '全球巨星' },
   { range: [9.0, 10.1], title: '跨世代傳奇' },
 ];
 
 const CELEBRITY_POOL = [
-  "Taylor Swift", "Michael Jackson", "周杰倫", "Lady Gaga", "Tom Cruise", "Kanye West", 
-  "Lisa", "IU", "Brad Pitt", "Beyonce", "Justin Bieber", "Emma Watson", 
-  "Leonardo DiCaprio", "Rihanna", "Drake", "Ariana Grande", "BTS", "Blackpink", 
-  "林俊傑", "蔡依林", "Eminem", "Selena Gomez", "The Weeknd", "Dua Lipa", 
-  "Robert Downey Jr.", "Scarlett Johansson", "Zendaya", "Tom Holland", "Billie Eilish", "Adele",
-
-  // --- 華語圈 (演員/歌手) ---
-  "陳奕迅", "張惠妹", "鄧紫棋", "李榮浩", "蕭敬騰", "王菲", "劉德華", "梁朝偉", "周星馳", "成龍",
-  "甄子丹", "舒淇", "張鈞甯", "許光漢", "柯震東", "桂綸鎂", "彭于晏", "王嘉爾", "張藝興", "鹿晗",
-  "五月天", "告五人", "李安", "賈靜雯", "吳慷仁", "謝盈萱", "林志玲", "言承旭", "周予天", "周興哲",
-  "楊乃文", "艾怡良", "魏如萱", "張震", "金城武", "莫文蔚", "孫燕姿", "林憶蓮", "李宗盛", "羅大佑",
-
-  // --- 歐美娛樂圈 (演員/歌手) ---
-  "Ed Sheeran", "Bruno Mars", "Katy Perry", "Harry Styles", "Shawn Mendes", "Post Malone", "Doja Cat", "Olivia Rodrigo", "Miley Cyrus", "Lana Del Rey",
-  "Snoop Dogg", "Jay-Z", "Kendrick Lamar", "Travis Scott", "Cardi B", "Nicki Minaj", "Chris Martin", "Coldplay", "Adam Levine", "Maroon 5",
-  "Jennifer Lawrence", "Margot Robbie", "Ryan Gosling", "Chris Hemsworth", "Henry Cavill", "Gal Gadot", "Benedict Cumberbatch", "Cillian Murphy", "Keanu Reeves", "Will Smith",
-  "Dwayne Johnson", "Zac Efron", "Timothée Chalamet", "Austin Butler", "Florence Pugh", "Anya Taylor-Joy", "Millie Bobby Brown", "Jenna Ortega", "Meryl Streep", "Morgan Freeman",
-  "Angelina Jolie", "Johnny Depp", "Natalie Portman", "Anne Hathaway", "Hugh Jackman", "Christian Bale", "Tom Hardy", "Jared Leto", "Jason Momoa", "Ezra Miller",
-
-  // --- 日韓圈 (歌手/演員) ---
-  "NewJeans", "IVE", "LE SSERAFIM", "Twice", "Seventeen", "Stray Kids", "TXT", "aespa", "NCT", "EXO",
-  "G-Dragon", "Taeyang", "Rain", "PSY", "Zico", "Jay Park", "Hwasa", "CL", "BoA", "Hyuna",
-  "孔劉", "玄彬", "孫藝珍", "宋仲基", "宋慧喬", "朴敘俊", "朴恩斌", "韓韶禧", "李敏鎬", "金秀賢",
-  "米津玄師", "Yoasobi", "LiSA", "Aimer", "宇多田光", "安室奈美惠", "藤井風", "Vaundy", "King Gnu", "Official髭男dism",
-  "木村拓哉", "佐藤健", "菅田將暉", "小栗旬", "濱邊美波", "新垣結衣", "石原聰美", "北川景子", "橋本環奈", "滿島光",
-
-  // --- 跨界與其他經典 ---
-  "Cristiano Ronaldo", "Lionel Messi", "LeBron James", "Stephen Curry", "Lewis Hamilton", "Shohei Ohtani", "Conor McGregor", "Serena Williams", "Tiger Woods", "David Beckham",
-  "Gordon Ramsay", "MrBeast", "Elon Musk", "Kim Kardashian", "Kylie Jenner", "Kendall Jenner", "Gigi Hadid", "Bella Hadid", "Hailey Bieber", "Naomi Campbell",
-  "Madonna", "Britney Spears", "Cher", "Celine Dion", "Elton John", "Paul McCartney", "Mick Jagger", "Freddie Mercury", "Elvis Presley", "Whitney Houston",
-  "Quentin Tarantino", "Christopher Nolan", "Steven Spielberg", "James Cameron", "Martin Scorsese", "Wes Anderson", "Greta Gerwig", "Bong Joon-ho", "Hideo Kojima", "Hayao Miyazaki",
-
-  // --- 更多全球知名藝人 (補充至 300) ---
-  "Bad Bunny", "J Balvin", "Karol G", "Rosalia", "Maluma", "Shakira", "Ricky Martin", "Enrique Iglesias", "Camila Cabello", "Halsey",
-  "Sam Smith", "Troye Sivan", "Lorde", "SZA", "Megan Thee Stallion", "Jack Harlow", "Kid Cudi", "A$AP Rocky", "Tyler, the Creator", "Frank Ocean",
-  "Andrew Garfield", "Tom Hiddleston", "Sebastian Stan", "Anthony Mackie", "Jeremy Renner", "Mark Ruffalo", "Paul Rudd", "Brie Larson", "Elizabeth Olsen", "Nicolas Cage",
-  "Pedro Pascal", "Oscar Isaac", "Mad Mikkelsen", "Tilda Swinton", "Cate Blanchett", "Nicole Kidman", "Viola Davis", "Michelle Yeoh", "Ke Huy Quan", "Jackie Chan",
-  "Hanni", "Minji", "Danielle", "Haerin", "Hyein", "Wonyoung", "Karina", "Winter", "Ningning", "Giselle",
-  "Cha Eun-woo", "Rowoon", "Han Hyo-joo", "Lee Jung-jae", "Jung Ho-yeon", "Wi Ha-joon", "Gong Hyo-jin", "Lee Bo-young", "Ji Sung", "Kim Tae-ri",
-  "V", "Jimin", "Jungkook", "Suga", "Jin", "RM", "J-Hope", "Jisoo", "Jennie", "Rosé",
-  "Tinashe", "Kelela", "PinkPantheress", "Ice Spice", "Central Cee", "Stormzy", "Dave", "Burna Boy", "Wizkid", "Tems",
-  "Sia", "Lana Condor", "Awkwafina", "Simu Liu", "Kumail Nanjiani", "Dev Patel", "Riz Ahmed", "Zandy Reich", "Lily Collins", "Lucas Bravo",
-  "Jamie Dornan", "Dakota Johnson", "Vanessa Kirby", "Lily-Rose Depp", "Timothée Chalamet", "Zoe Kravitz", "Robert Pattinson", "Emma Stone", "Ryan Reynolds", "Blake Lively",
-  "Sebastian Vettel", "Max Verstappen", "Charles Leclerc", "Lando Norris", "Daniel Ricciardo", "Kimi Raikkonen", "Michael Schumacher", "Roger Federer", "Rafael Nadal", "Novak Djokovic",
-  "Zlatan Ibrahimovic", "Neymar Jr", "Kylian Mbappe", "Erling Haaland", "Kevin De Bruyne", "Mohamed Salah", "Son Heung-min", "Harry Kane", "Giannis Antetokounmpo", "Luka Doncic",
-  "Joe Rogan", "Logan Paul", "Jake Paul", "Casey Neistat", "Marques Brownlee", "PewDiePie", "Emma Chamberlain", "Charli D'Amelio", "Addison Rae", "Khaby Lame",
-  "J.K. Rowling", "Stephen King", "George R.R. Martin", "Haruki Murakami", "Margaret Atwood", "Neil Gaiman", "Malala Yousafzai", "Greta Thunberg", "Michelle Obama", "Barack Obama",
-  "Pope Francis", "Dalai Lama", "Bear Grylls", "David Attenborough", "Neil deGrasse Tyson", "Bill Nye", "Michio Kaku", "Jordan Peterson", "Yuval Noah Harari", "Malcolm Gladwell",
-  "Lin-Manuel Miranda", "Ben Platt", "Idina Menzel", "Kristin Chenoweth", "Billy Porter", "RuPaul", "Trixie Mattel", "Katya Zamolodchikova", "Sasha Colby", "Bianca Del Rio"
+  "Taylor Swift",
+  "Cillian Murphy", "Margot Robbie", "Christopher Nolan", "Meryl Streep", "Johnny Depp",
+  "Angelina Jolie", "Keanu Reeves", "Anne Hathaway", "Benedict Cumberbatch", "Chris Evans",
+  "Chris Hemsworth", "Natalie Portman", "Ryan Gosling", "Emma Stone", "Jennifer Lawrence",
+  "Timothée Chalamet", "Anya Taylor-Joy", "Florence Pugh", "Christian Bale", "Matt Damon",
+  "Joaquin Phoenix", "Henry Cavill", "Gal Gadot", "Jason Momoa", "Will Smith",
+  "Morgan Freeman", "Samuel L. Jackson", "Quentin Tarantino", "Steven Spielberg", "Pedro Pascal",
+  "Austin Butler", "Jenna Ortega", "Millie Bobby Brown", "Nicolas Cage", "Hugh Jackman",
+  "Ryan Reynolds", "Blake Lively", "Harrison Ford", "Tom Hardy", "Elizabeth Olsen",
+  "Bruno Mars", "Ed Sheeran", "Katy Perry", "Post Malone", "Doja Cat",
+  "SZA", "Harry Styles", "Olivia Rodrigo", "Miley Cyrus", "Lana Del Rey",
+  "Kendrick Lamar", "Travis Scott", "Nicki Minaj", "Cardi B", "Megan Thee Stallion",
+  "Sam Smith", "Shawn Mendes", "Camila Cabello", "Halsey", "Lorde",
+  "Coldplay", "Maroon 5", "Imagine Dragons", "Britney Spears", "Madonna",
+  "Mariah Carey", "Celine Dion", "Whitney Houston", "Elton John", "Freddie Mercury",
+  "David Bowie", "Mick Jagger", "Prince", "Shakira", "Jennifer Lopez",
+  "Usher", "Jay-Z", "Pharrell Williams", "Calvin Harris", "David Guetta",
+  "木村拓哉", "佐藤健", "新垣結衣", "石原聰美", "米津玄師",
+  "藤井風", "YOASOBI", "堺雅人", "阿部寬", "滿島光",
+  "權志龍", "太陽", "NewJeans", "IVE", "TWICE",
+  "SEVENTEEN", "Stray Kids", "玄彬", "孫藝真", "孔劉",
+  "李敏鎬", "宋慧喬", "全智賢", "韓韶禧", "朴敘俊",
+  "朴恩斌", "金秀賢", "李棟旭", "邊佑錫", "金智媛",
+  "少女時代", "EXO", "PSY", "Ananya Panday", "Shah Rukh Khan",
+  "吳青峰", "伍佰", "李宗盛", "羅大佑", "五月天",
+  "告五人", "孫燕姿", "莫文蔚", "梁靜茹", "陶喆",
+  "王力宏", "謝霆鋒", "張學友", "郭富城", "黎明",
+  "舒淇", "湯唯", "章子怡", "鞏俐", "周迅",
+  "胡歌", "吳京", "甄子丹", "楊紫瓊", "許光漢",
+  "林柏宏", "桂綸鎂", "賈靜雯", "吳慷仁", "彭于晏",
+  "阮經天", "楊丞琳", "潘瑋柏", "張杰", "薛之謙",
+  "Tom Cruise", "George Clooney", "Brad Pitt", "Denzel Washington", "Leonardo DiCaprio",
+  "Kate Winslet", "Zoe Saldana", "Vin Diesel", "Dwayne Johnson", "Gal Gadot"
 ];
 
 const RadarChart: React.FC<{ rating: number }> = ({ rating }) => {
-  const size = 260; // 稍微調大一點
+  const size = 260;
   const center = size / 2;
   const radius = size * 0.32;
   const angleStep = (Math.PI * 2) / 5;
   
-  // 基於評分的動態維度數據
   const dims = [
     { name: '全球滲透', weight: 0.5 + (rating / 45) },
     { name: '核心效率', weight: 0.4 + (rating / 50) },
@@ -188,8 +171,7 @@ const App: React.FC = () => {
       interval = window.setInterval(() => {
         setLoadingProgress(prev => {
           if (prev >= 99.5) return 99.5;
-          const increment = 0.166; 
-          return prev + increment;
+          return prev + 0.166;
         });
       }, 100);
     } else {
@@ -295,7 +277,6 @@ const App: React.FC = () => {
   };
 
   const renderNameInHero = (data: CelebrityData) => {
-    // 優先顯示藝名
     const displayName = data.stageName || data.name;
     let chinese = "";
     let english = "";
@@ -493,7 +474,6 @@ const App: React.FC = () => {
             </InfoCard>
             <InfoCard title="檔案資料 / BIO" onClick={() => openDetail('basic', '檔案資料 / BIO')}>{renderBasicInfo(data)}</InfoCard>
             <InfoCard title="相關藝人 / RELATED" onClick={() => openDetail('related', '相關藝人 / RELATED')}>{renderRelatedArtists(data.relatedCelebrities, false)}</InfoCard>
-            <InfoCard title="成長背景 / ORIGIN" onClick={() => openDetail('growth', '成長背景 / ORIGIN')}><p className="text-zinc-500 leading-relaxed line-clamp-[8] italic text-base font-medium">{data.growthBackground}</p></InfoCard>
           </div>
           <div className="lg:col-span-6 space-y-12">
             <InfoCard title="主頁資訊 / PRIMARY HERO" onClick={() => {}} className="relative aspect-[16/11] bg-zinc-950 border-2 border-orange-500/20 rounded-[5rem] flex flex-col items-center justify-center p-16 shadow-[0_50px_100px_rgba(0,0,0,0.8)] cursor-default overflow-hidden" showExpandIcon={false}>
@@ -510,6 +490,7 @@ const App: React.FC = () => {
                 <InfoCard key={key} title="" onClick={() => {}} className="p-10 rounded-[2.5rem] text-center bg-zinc-950/50 hover:border-orange-500 cursor-default" showExpandIcon={false}><div className="text-zinc-800 text-[10px] font-black uppercase mb-3 tracking-[0.5em]">{key}</div><div className="text-orange-500 font-black text-xl uppercase italic tracking-tighter">{val}</div></InfoCard>
               ))}
             </div>
+            <InfoCard title="成長背景 / ORIGIN" onClick={() => openDetail('growth', '成長背景 / ORIGIN')}><p className="text-zinc-500 leading-relaxed italic text-base font-medium">{data.growthBackground}</p></InfoCard>
           </div>
           <div className="lg:col-span-3 space-y-12">
             <FeaturedMediaCard media={data.featuredMedia} onClick={() => openDetail('media', '核心作品分析 / PRODUCTION')} />
