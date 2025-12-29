@@ -4,11 +4,12 @@ import { CelebrityData } from "../types";
 
 export const getSuggestions = async (partialName: string): Promise<string[]> => {
   if (partialName.length < 1) return [];
-  if (!process.env.API_KEY || process.env.API_KEY.includes("GEMINI_API_KEY")) {
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  if (!apiKey || apiKey.includes("GEMINI_API_KEY")) {
     console.error("API Key is missing or invalid. Please check your configuration.");
     return ["Error: API Key Failed"];
   }
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey });
   try {
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
@@ -28,10 +29,11 @@ export const getSuggestions = async (partialName: string): Promise<string[]> => 
 };
 
 export const fetchCelebrityData = async (name: string): Promise<CelebrityData> => {
-  if (!process.env.API_KEY || process.env.API_KEY.includes("GEMINI_API_KEY")) {
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  if (!apiKey || apiKey.includes("GEMINI_API_KEY")) {
     throw new Error("系統配置錯誤：API Key 未設定或無效。請聯繫管理員。");
   }
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey });
 
   const response = await ai.models.generateContent({
     model: "gemini-3-pro-preview",
