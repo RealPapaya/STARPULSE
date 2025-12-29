@@ -12,7 +12,7 @@ export const getSuggestions = async (partialName: string): Promise<string[]> => 
   const ai = new GoogleGenAI({ apiKey });
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-1.5-flash",
       contents: `提供 5 個與 "${partialName}" 相關的知名歌手或影星姓名建議。只需返回姓名列表。`,
       config: {
         responseMimeType: "application/json",
@@ -36,7 +36,7 @@ export const fetchCelebrityData = async (name: string): Promise<CelebrityData> =
   const ai = new GoogleGenAI({ apiKey });
 
   const response = await ai.models.generateContent({
-    model: "gemini-3-pro-preview",
+    model: "gemini-1.5-flash",
     contents: `對人物 "${name}" 進行極度嚴苛的數據檢索與【全球權威指數 / TIER INDEX】評分。
     
     【評分量尺定義 - 絕對全球化標準】:
