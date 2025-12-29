@@ -4,6 +4,10 @@ import { CelebrityData } from "../types";
 
 export const getSuggestions = async (partialName: string): Promise<string[]> => {
   if (partialName.length < 1) return [];
+  if (!process.env.API_KEY || process.env.API_KEY.includes("GEMINI_API_KEY")) {
+    console.error("API Key is missing or invalid. Please check your configuration.");
+    return ["Error: API Key Failed"];
+  }
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   try {
     const response = await ai.models.generateContent({
@@ -24,8 +28,11 @@ export const getSuggestions = async (partialName: string): Promise<string[]> => 
 };
 
 export const fetchCelebrityData = async (name: string): Promise<CelebrityData> => {
+  if (!process.env.API_KEY || process.env.API_KEY.includes("GEMINI_API_KEY")) {
+    throw new Error("系統配置錯誤：API Key 未設定或無效。請聯繫管理員。");
+  }
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  
+
   const response = await ai.models.generateContent({
     model: "gemini-3-pro-preview",
     contents: `對人物 "${name}" 進行極度嚴苛的數據檢索與【全球權威指數 / TIER INDEX】評分。
@@ -108,7 +115,7 @@ export const fetchCelebrityData = async (name: string): Promise<CelebrityData> =
           },
           famousWorks: {
             type: Type.ARRAY,
-            items: { 
+            items: {
               type: Type.OBJECT,
               properties: {
                 title: { type: Type.STRING },
@@ -128,9 +135,9 @@ export const fetchCelebrityData = async (name: string): Promise<CelebrityData> =
             },
             required: ["title", "type", "description", "releaseDate", "relatedPeople"]
           },
-          relatedCelebrities: { 
-            type: Type.ARRAY, 
-            items: { 
+          relatedCelebrities: {
+            type: Type.ARRAY,
+            items: {
               type: Type.OBJECT,
               properties: {
                 name: { type: Type.STRING },
