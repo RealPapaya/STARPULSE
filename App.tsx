@@ -8,14 +8,14 @@ import FeaturedMediaCard from './components/FeaturedMediaCard';
 
 const STAR_RANKS = [
   { range: [0.0, 1.0], title: '演藝廢料' },
-  { range: [1.0, 2.0], title: '七流藝人' },
-  { range: [2.0, 3.0], title: '六流藝人' },
-  { range: [3.0, 4.0], title: '五流藝人' },
-  { range: [4.0, 5.0], title: '四流藝人' },
-  { range: [5.0, 6.0], title: '三流藝人' },
-  { range: [6.0, 7.0], title: '二流藝人' },
-  { range: [7.0, 8.0], title: '一流藝人' },
-  { range: [8.0, 9.0], title: '頂流藝人' },
+  { range: [1.0, 2.0], title: '街頭藝人' },
+  { range: [2.0, 3.0], title: '五流藝人' },
+  { range: [3.0, 4.0], title: '四流藝人' },
+  { range: [4.0, 5.0], title: '三流藝人' },
+  { range: [5.0, 6.0], title: '二流藝人' },
+  { range: [6.0, 7.0], title: '一流藝人' },
+  { range: [7.0, 8.0], title: '頂流藝人' },
+  { range: [8.0, 9.0], title: '全球巨星' },
   { range: [9.0, 10.1], title: '跨世代傳奇' },
 ];
 
@@ -24,7 +24,51 @@ const CELEBRITY_POOL = [
   "Lisa", "IU", "Brad Pitt", "Beyonce", "Justin Bieber", "Emma Watson", 
   "Leonardo DiCaprio", "Rihanna", "Drake", "Ariana Grande", "BTS", "Blackpink", 
   "林俊傑", "蔡依林", "Eminem", "Selena Gomez", "The Weeknd", "Dua Lipa", 
-  "Robert Downey Jr.", "Scarlett Johansson", "Zendaya", "Tom Holland", "Billie Eilish", "Adele"
+  "Robert Downey Jr.", "Scarlett Johansson", "Zendaya", "Tom Holland", "Billie Eilish", "Adele",
+
+  // --- 華語圈 (演員/歌手) ---
+  "陳奕迅", "張惠妹", "鄧紫棋", "李榮浩", "蕭敬騰", "王菲", "劉德華", "梁朝偉", "周星馳", "成龍",
+  "甄子丹", "舒淇", "張鈞甯", "許光漢", "柯震東", "桂綸鎂", "彭于晏", "王嘉爾", "張藝興", "鹿晗",
+  "五月天", "告五人", "李安", "賈靜雯", "吳慷仁", "謝盈萱", "林志玲", "言承旭", "周予天", "周興哲",
+  "楊乃文", "艾怡良", "魏如萱", "張震", "金城武", "莫文蔚", "孫燕姿", "林憶蓮", "李宗盛", "羅大佑",
+
+  // --- 歐美娛樂圈 (演員/歌手) ---
+  "Ed Sheeran", "Bruno Mars", "Katy Perry", "Harry Styles", "Shawn Mendes", "Post Malone", "Doja Cat", "Olivia Rodrigo", "Miley Cyrus", "Lana Del Rey",
+  "Snoop Dogg", "Jay-Z", "Kendrick Lamar", "Travis Scott", "Cardi B", "Nicki Minaj", "Chris Martin", "Coldplay", "Adam Levine", "Maroon 5",
+  "Jennifer Lawrence", "Margot Robbie", "Ryan Gosling", "Chris Hemsworth", "Henry Cavill", "Gal Gadot", "Benedict Cumberbatch", "Cillian Murphy", "Keanu Reeves", "Will Smith",
+  "Dwayne Johnson", "Zac Efron", "Timothée Chalamet", "Austin Butler", "Florence Pugh", "Anya Taylor-Joy", "Millie Bobby Brown", "Jenna Ortega", "Meryl Streep", "Morgan Freeman",
+  "Angelina Jolie", "Johnny Depp", "Natalie Portman", "Anne Hathaway", "Hugh Jackman", "Christian Bale", "Tom Hardy", "Jared Leto", "Jason Momoa", "Ezra Miller",
+
+  // --- 日韓圈 (歌手/演員) ---
+  "NewJeans", "IVE", "LE SSERAFIM", "Twice", "Seventeen", "Stray Kids", "TXT", "aespa", "NCT", "EXO",
+  "G-Dragon", "Taeyang", "Rain", "PSY", "Zico", "Jay Park", "Hwasa", "CL", "BoA", "Hyuna",
+  "孔劉", "玄彬", "孫藝珍", "宋仲基", "宋慧喬", "朴敘俊", "朴恩斌", "韓韶禧", "李敏鎬", "金秀賢",
+  "米津玄師", "Yoasobi", "LiSA", "Aimer", "宇多田光", "安室奈美惠", "藤井風", "Vaundy", "King Gnu", "Official髭男dism",
+  "木村拓哉", "佐藤健", "菅田將暉", "小栗旬", "濱邊美波", "新垣結衣", "石原聰美", "北川景子", "橋本環奈", "滿島光",
+
+  // --- 跨界與其他經典 ---
+  "Cristiano Ronaldo", "Lionel Messi", "LeBron James", "Stephen Curry", "Lewis Hamilton", "Shohei Ohtani", "Conor McGregor", "Serena Williams", "Tiger Woods", "David Beckham",
+  "Gordon Ramsay", "MrBeast", "Elon Musk", "Kim Kardashian", "Kylie Jenner", "Kendall Jenner", "Gigi Hadid", "Bella Hadid", "Hailey Bieber", "Naomi Campbell",
+  "Madonna", "Britney Spears", "Cher", "Celine Dion", "Elton John", "Paul McCartney", "Mick Jagger", "Freddie Mercury", "Elvis Presley", "Whitney Houston",
+  "Quentin Tarantino", "Christopher Nolan", "Steven Spielberg", "James Cameron", "Martin Scorsese", "Wes Anderson", "Greta Gerwig", "Bong Joon-ho", "Hideo Kojima", "Hayao Miyazaki",
+
+  // --- 更多全球知名藝人 (補充至 300) ---
+  "Bad Bunny", "J Balvin", "Karol G", "Rosalia", "Maluma", "Shakira", "Ricky Martin", "Enrique Iglesias", "Camila Cabello", "Halsey",
+  "Sam Smith", "Troye Sivan", "Lorde", "SZA", "Megan Thee Stallion", "Jack Harlow", "Kid Cudi", "A$AP Rocky", "Tyler, the Creator", "Frank Ocean",
+  "Andrew Garfield", "Tom Hiddleston", "Sebastian Stan", "Anthony Mackie", "Jeremy Renner", "Mark Ruffalo", "Paul Rudd", "Brie Larson", "Elizabeth Olsen", "Nicolas Cage",
+  "Pedro Pascal", "Oscar Isaac", "Mad Mikkelsen", "Tilda Swinton", "Cate Blanchett", "Nicole Kidman", "Viola Davis", "Michelle Yeoh", "Ke Huy Quan", "Jackie Chan",
+  "Hanni", "Minji", "Danielle", "Haerin", "Hyein", "Wonyoung", "Karina", "Winter", "Ningning", "Giselle",
+  "Cha Eun-woo", "Rowoon", "Han Hyo-joo", "Lee Jung-jae", "Jung Ho-yeon", "Wi Ha-joon", "Gong Hyo-jin", "Lee Bo-young", "Ji Sung", "Kim Tae-ri",
+  "V", "Jimin", "Jungkook", "Suga", "Jin", "RM", "J-Hope", "Jisoo", "Jennie", "Rosé",
+  "Tinashe", "Kelela", "PinkPantheress", "Ice Spice", "Central Cee", "Stormzy", "Dave", "Burna Boy", "Wizkid", "Tems",
+  "Sia", "Lana Condor", "Awkwafina", "Simu Liu", "Kumail Nanjiani", "Dev Patel", "Riz Ahmed", "Zandy Reich", "Lily Collins", "Lucas Bravo",
+  "Jamie Dornan", "Dakota Johnson", "Vanessa Kirby", "Lily-Rose Depp", "Timothée Chalamet", "Zoe Kravitz", "Robert Pattinson", "Emma Stone", "Ryan Reynolds", "Blake Lively",
+  "Sebastian Vettel", "Max Verstappen", "Charles Leclerc", "Lando Norris", "Daniel Ricciardo", "Kimi Raikkonen", "Michael Schumacher", "Roger Federer", "Rafael Nadal", "Novak Djokovic",
+  "Zlatan Ibrahimovic", "Neymar Jr", "Kylian Mbappe", "Erling Haaland", "Kevin De Bruyne", "Mohamed Salah", "Son Heung-min", "Harry Kane", "Giannis Antetokounmpo", "Luka Doncic",
+  "Joe Rogan", "Logan Paul", "Jake Paul", "Casey Neistat", "Marques Brownlee", "PewDiePie", "Emma Chamberlain", "Charli D'Amelio", "Addison Rae", "Khaby Lame",
+  "J.K. Rowling", "Stephen King", "George R.R. Martin", "Haruki Murakami", "Margaret Atwood", "Neil Gaiman", "Malala Yousafzai", "Greta Thunberg", "Michelle Obama", "Barack Obama",
+  "Pope Francis", "Dalai Lama", "Bear Grylls", "David Attenborough", "Neil deGrasse Tyson", "Bill Nye", "Michio Kaku", "Jordan Peterson", "Yuval Noah Harari", "Malcolm Gladwell",
+  "Lin-Manuel Miranda", "Ben Platt", "Idina Menzel", "Kristin Chenoweth", "Billy Porter", "RuPaul", "Trixie Mattel", "Katya Zamolodchikova", "Sasha Colby", "Bianca Del Rio"
 ];
 
 const RadarChart: React.FC<{ rating: number }> = ({ rating }) => {
@@ -35,11 +79,11 @@ const RadarChart: React.FC<{ rating: number }> = ({ rating }) => {
   
   // 基於評分的動態維度數據
   const dims = [
-    { name: '權威影響', weight: 0.7 + (rating / 35) },
-    { name: '商業價值', weight: 0.6 + (rating / 40) },
-    { name: '大眾認知', weight: 0.8 + (rating / 30) },
-    { name: '專業地位', weight: 0.7 + (rating / 33) },
-    { name: '產出效率', weight: 0.5 + (rating / 25) },
+    { name: '全球滲透', weight: 0.5 + (rating / 45) },
+    { name: '核心效率', weight: 0.4 + (rating / 50) },
+    { name: '權威獎項', weight: 0.6 + (rating / 40) },
+    { name: '商業統治', weight: 0.5 + (rating / 42) },
+    { name: '時代地位', weight: 0.4 + (rating / 48) },
   ];
   
   const points = dims.map((d, i) => {

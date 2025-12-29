@@ -28,24 +28,31 @@ export const fetchCelebrityData = async (name: string): Promise<CelebrityData> =
   
   const response = await ai.models.generateContent({
     model: "gemini-3-pro-preview",
-    contents: `深度分析人物 "${name}"，並依據下列【權威數據金字塔】標準進行精準評分。
+    contents: `對人物 "${name}" 進行極度嚴苛的數據檢索與【全球權威指數 / TIER INDEX】評分。
     
-    1. 【姓名細節】必須分別提供「本名 (Original Name)」與「藝名 (Stage Name)」。
-    2. 【評分標準與權重】(總分 0.0 - 10.0):
-       - 評分分佈必須呈現「金字塔型」，9.0 以上僅限於極少數歷史級人物（全球佔比低於 0.1%）。
-       - 【歌手】: 側重於「官方總觀看數 (須達 100 億以上才具備傳奇資格)」、「數位串流效率 (平均每首歌的點擊率)」。
-       - 【演員】: 側重於「全球總票房影響力」、「平均單片票房產出」、「影史經典地位 (如奧斯卡或指標性獎項)」。
-       - 【產出效率】: 影片/影集數量極多但平均表現平庸者，必須降階處理。
-    3. 【等級劃分】:
-       - 9.0-10.0 (跨世代傳奇): 人類文明級別的統治力，歷史標竿。
-       - 8.0-8.9 (頂流藝人): 當代一線頂峰，極高知名度。
-       - 7.0-7.9 (一流藝人): 各自領域的佼佼者。
-    4. 【數據收集】收集其生涯總數據。
-    5. 【生涯故事】提供極致詳細、宏大的傳記式敘述（至少 800 字）。
-    6. 【人物名稱】回傳格式為 "中文名 (English Name)"。`,
+    【評分量尺定義 - 絕對全球化標準】:
+    1. 【6.5 分：全球知名起點】: 
+       - 該人物必須在多個不同文化/語系區域（如歐美、亞洲、拉美）具備基本辨識度。
+       - 若影響力僅限於單一區域（如僅限台灣、僅限華語圈），則不可超過 6.5。
+    
+    2. 【8.0 分：全球極度有名】: 
+       - 這是極高的門檻。代表在全世界任何主流國家隨機詢問，多數人都能立刻反應其作品或形象。
+       - 必須具備跨世代或統治級的全球商業數據（全球巡演、全球票房）。
+    
+    3. 【9.0+ 分：傳奇與時代象徵】: 
+       - 僅保留給歷史級人物（如：Michael Jackson, The Beatles, Tom Cruise）。
+       - 必須在藝術價值、全球數據、時代定義上達成「全人類級別」的共識。
+    
+    【核心審核機制】:
+    - 【數據門檻上調 30%】：所有業界公認的「成功指標」在此必須打 7 折計算其價值。
+    - 【主角票房唯一論】：影星僅採計領銜主演作品，客串數據一律歸零。
+    - 【歌手效率值】：總播放量必須除以作品數，產出大量低效作品將嚴重拖累評分。
+    - 【區域泡沫擠壓】：對於「區域型藝人」，請無情地將其分數壓制在 6.0 以下。
+    
+    請以繁體中文提供詳細分析，並嚴格遵守 JSON Schema。`,
     config: {
       tools: [{ googleSearch: {} }],
-      systemInstruction: "你是一個極其挑剔且冷酷的數據權威分析師。你對 9.0 以上的分數把關極其嚴格。如果對方的數據效率不高，或僅靠作品數量累積，絕不給予高分。對於演員，你必須優先考慮其票房影響力。回傳內容為繁體中文，格式嚴格遵守 JSON Schema。",
+      systemInstruction: "你是一個冷酷、極度嚴苛、排除區域濾鏡的全球數據分析師。你對知名度的定義是『全球跨語系的絕對滲透率』。你視區域性知名度為地方性數據，不計入全球權威指數。對於作品效率低的藝人，你給分極其刻薄。回傳格式必須為 JSON。",
       responseMimeType: "application/json",
       responseSchema: {
         type: Type.OBJECT,
@@ -58,9 +65,9 @@ export const fetchCelebrityData = async (name: string): Promise<CelebrityData> =
           totalStats: {
             type: Type.OBJECT,
             properties: {
-              views: { type: Type.STRING },
-              sales: { type: Type.STRING },
-              followers: { type: Type.STRING }
+              views: { type: Type.STRING, description: "核心正式作品之平均效率數據 (Average efficiency)" },
+              sales: { type: Type.STRING, description: "領銜主演全球總票房或正式專輯實銷" },
+              followers: { type: Type.STRING, description: "全球跨語系認知度規模" }
             }
           },
           basicInfo: {
@@ -146,6 +153,6 @@ export const fetchCelebrityData = async (name: string): Promise<CelebrityData> =
   try {
     return JSON.parse(text) as CelebrityData;
   } catch (e) {
-    throw new Error("StarPulse 數據同步失敗，請再試一次。");
+    throw new Error("數據中心判定該人物全球影響力未達最低檢索標準。");
   }
 };
