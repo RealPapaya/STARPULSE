@@ -173,7 +173,7 @@ export const fetchCelebrityData = async (name: string): Promise<CelebrityData> =
       // Actually, listModels is not on the client instance in this SDK, 
       // it might not be directly available or requires a different manager.
       // Let's print a helpful message instead since verify model is internal.
-      console.log("Suggestion: Verify that 'gemini-1.5-flash-001' is enabled in your Google AI Studio project.");
+      console.log("Suggestion: Verify that your API key is valid and the model is enabled in Google AI Studio.");
     } catch (listErr) {
       console.error("Failed to list models", listErr);
     }
