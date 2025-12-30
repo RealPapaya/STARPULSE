@@ -12,7 +12,7 @@ export const getSuggestions = async (partialName: string): Promise<string[]> => 
 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash",
+    model: "gemini-2.0-flash-lite-preview-02-05",
     generationConfig: {
       responseMimeType: "application/json",
       responseSchema: {
@@ -39,7 +39,7 @@ export const fetchCelebrityData = async (name: string): Promise<CelebrityData> =
 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash",
+    model: "gemini-2.0-flash-lite-preview-02-05",
     systemInstruction: "你是一個冷酷、極度嚴苛、排除區域濾鏡的全球數據分析師。你對知名度的定義是『全球跨語系的絕對滲透率』。你視區域性知名度為地方性數據，不計入全球權威指數。對於作品效率低的藝人，你給分極其刻薄。回傳格式必須為 JSON。",
     generationConfig: {
       responseMimeType: "application/json",
