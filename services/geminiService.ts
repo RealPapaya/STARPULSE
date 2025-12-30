@@ -12,7 +12,7 @@ export const getSuggestions = async (partialName: string): Promise<string[]> => 
 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash-latest",
+    model: "gemini-1.5-flash-001",
     generationConfig: {
       responseMimeType: "application/json",
       responseSchema: {
@@ -39,7 +39,7 @@ export const fetchCelebrityData = async (name: string): Promise<CelebrityData> =
 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash-latest",
+    model: "gemini-1.5-flash-001",
     systemInstruction: "你是一個冷酷、極度嚴苛、排除區域濾鏡的全球數據分析師。你對知名度的定義是『全球跨語系的絕對滲透率』。你視區域性知名度為地方性數據，不計入全球權威指數。對於作品效率低的藝人，你給分極其刻薄。回傳格式必須為 JSON。",
     generationConfig: {
       responseMimeType: "application/json",
@@ -166,6 +166,18 @@ export const fetchCelebrityData = async (name: string): Promise<CelebrityData> =
     return JSON.parse(result.response.text()) as CelebrityData;
   } catch (e) {
     console.error("Detail Error:", e);
-    throw new Error("數據中心判定該人物全球影響力未達最低檢索標準，或系統暫時無法連線。");
+    // Debug: List available models to help identify the issue
+    try {
+      // Note: This requires the GoogleGenerativeAI instance (genAI)
+      // Since fetchCelebrityData creates a new instance, we reuse it here? 
+      // Actually, listModels is not on the client instance in this SDK, 
+      // it might not be directly available or requires a different manager.
+      // Let's print a helpful message instead since verify model is internal.
+      console.log("Suggestion: Verify that 'gemini-1.5-flash-001' is enabled in your Google AI Studio project.");
+    } catch (listErr) {
+      console.error("Failed to list models", listErr);
+    }
+
+    throw new Error("數據中心判定該人物全球影響力未達最低檢索標準，或系統暫時無法連線 (404)。");
   }
 };

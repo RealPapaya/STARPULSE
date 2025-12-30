@@ -60,7 +60,7 @@ const RadarChart: React.FC<{ rating: number }> = ({ rating }) => {
   const center = size / 2;
   const radius = size * 0.32;
   const angleStep = (Math.PI * 2) / 5;
-  
+
   const dims = [
     { name: '全球滲透', weight: 0.5 + (rating / 45) },
     { name: '核心效率', weight: 0.4 + (rating / 50) },
@@ -68,48 +68,48 @@ const RadarChart: React.FC<{ rating: number }> = ({ rating }) => {
     { name: '商業統治', weight: 0.5 + (rating / 42) },
     { name: '時代地位', weight: 0.4 + (rating / 48) },
   ];
-  
+
   const points = dims.map((d, i) => {
     const val = Math.min(1, d.weight) * radius;
     const x = center + val * Math.cos(i * angleStep - Math.PI / 2);
     const y = center + val * Math.sin(i * angleStep - Math.PI / 2);
     return `${x},${y}`;
   }).join(' ');
-  
+
   const gridLevels = [0.2, 0.4, 0.6, 0.8, 1];
-  
+
   return (
     <div className="relative w-full flex justify-center py-6">
       <svg width={size} height={size} className="overflow-visible">
         {gridLevels.map((lvl, idx) => (
-          <polygon 
-            key={idx} 
+          <polygon
+            key={idx}
             points={dims.map((_, i) => {
               const r = lvl * radius;
               return `${center + r * Math.cos(i * angleStep - Math.PI / 2)},${center + r * Math.sin(i * angleStep - Math.PI / 2)}`;
-            }).join(' ')} 
-            className="fill-none stroke-zinc-800" 
-            strokeWidth="1" 
+            }).join(' ')}
+            className="fill-none stroke-zinc-800"
+            strokeWidth="1"
           />
         ))}
         {dims.map((_, i) => (
-          <line 
-            key={i} 
-            x1={center} 
-            y1={center} 
-            x2={center + radius * Math.cos(i * angleStep - Math.PI / 2)} 
-            y2={center + radius * Math.sin(i * angleStep - Math.PI / 2)} 
-            className="stroke-zinc-800" 
-            strokeWidth="1" 
+          <line
+            key={i}
+            x1={center}
+            y1={center}
+            x2={center + radius * Math.cos(i * angleStep - Math.PI / 2)}
+            y2={center + radius * Math.sin(i * angleStep - Math.PI / 2)}
+            className="stroke-zinc-800"
+            strokeWidth="1"
           />
         ))}
         <polygon points={points} className="fill-orange-500/30 stroke-orange-500 shadow-[0_0_15px_rgba(249,115,22,0.5)]" strokeWidth="2.5" />
         {dims.map((d, i) => (
-          <text 
-            key={i} 
-            x={center + (radius + 35) * Math.cos(i * angleStep - Math.PI / 2)} 
-            y={center + (radius + 35) * Math.sin(i * angleStep - Math.PI / 2)} 
-            textAnchor="middle" 
+          <text
+            key={i}
+            x={center + (radius + 35) * Math.cos(i * angleStep - Math.PI / 2)}
+            y={center + (radius + 35) * Math.sin(i * angleStep - Math.PI / 2)}
+            textAnchor="middle"
             alignmentBaseline="middle"
             className="fill-white font-black text-[12px] uppercase tracking-wider italic drop-shadow-md"
           >
@@ -267,9 +267,9 @@ const App: React.FC = () => {
         <div className="mt-8 border-t border-orange-500/20 pt-8 text-center">
           <h4 className="text-orange-500 font-black text-[10px] mb-6 italic tracking-[0.3em] uppercase underline decoration-orange-500/30">社交媒體連結 / SOCIAL MATRIX</h4>
           <div className="flex justify-center gap-6">
-            {social.facebook && <a href={social.facebook} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center hover:bg-orange-500 hover:text-black transition-all border border-white/5"><svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.312h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg></a>}
-            {social.instagram && <a href={social.instagram} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center hover:bg-orange-500 hover:text-black transition-all border border-white/5"><svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>}
-            {social.twitter && <a href={social.twitter} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center hover:bg-orange-500 hover:text-black transition-all border border-white/5"><svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>}
+            {social.facebook && <a href={social.facebook} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center hover:bg-orange-500 hover:text-black transition-all border border-white/5"><svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.312h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" /></svg></a>}
+            {social.instagram && <a href={social.instagram} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center hover:bg-orange-500 hover:text-black transition-all border border-white/5"><svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg></a>}
+            {social.twitter && <a href={social.twitter} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center hover:bg-orange-500 hover:text-black transition-all border border-white/5"><svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>}
           </div>
         </div>
       </div>
@@ -354,8 +354,8 @@ const App: React.FC = () => {
           {data.famousWorks.map((f, i) => (
             <a key={i} href={f.youtubeUrl} target="_blank" rel="noopener noreferrer" className="bg-zinc-950 p-8 rounded-[2rem] border border-orange-500/20 hover:border-orange-500 transition-all group/famous flex flex-col justify-between aspect-video">
               <div className="flex justify-between items-start">
-                 <h4 className="text-2xl font-black text-white italic uppercase leading-tight group-hover/famous:text-orange-500 transition-colors max-w-[80%]">{f.title}</h4>
-                 <div className="text-red-600"><svg className="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></div>
+                <h4 className="text-2xl font-black text-white italic uppercase leading-tight group-hover/famous:text-orange-500 transition-colors max-w-[80%]">{f.title}</h4>
+                <div className="text-red-600"><svg className="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" /></svg></div>
               </div>
             </a>
           ))}
@@ -375,10 +375,10 @@ const App: React.FC = () => {
       );
       case 'media': return (
         <div className="space-y-12">
-           <div className="bg-zinc-950 p-16 rounded-[4rem] border border-orange-500/20 text-center relative overflow-hidden shadow-2xl">
-              <h3 className="text-6xl md:text-8xl font-black text-white italic uppercase leading-tight mb-10 tracking-tighter">{data.featuredMedia.title}</h3>
-              <p className="text-zinc-300 leading-relaxed text-3xl max-w-4xl mx-auto italic font-medium">{data.featuredMedia.description}</p>
-           </div>
+          <div className="bg-zinc-950 p-16 rounded-[4rem] border border-orange-500/20 text-center relative overflow-hidden shadow-2xl">
+            <h3 className="text-6xl md:text-8xl font-black text-white italic uppercase leading-tight mb-10 tracking-tighter">{data.featuredMedia.title}</h3>
+            <p className="text-zinc-300 leading-relaxed text-3xl max-w-4xl mx-auto italic font-medium">{data.featuredMedia.description}</p>
+          </div>
         </div>
       );
       default: return null;
@@ -413,9 +413,9 @@ const App: React.FC = () => {
           <h1 ref={titleRef} className="text-7xl sm:text-8xl md:text-[10rem] lg:text-[13.5rem] font-black tracking-tighter italic leading-none select-none relative z-10 text-[#111] hover:text-transparent pr-12 lg:pr-24 transition-colors duration-300" style={{ backgroundImage: getTitleGradient(), WebkitBackgroundClip: 'text', backgroundClip: 'text', overflow: 'visible', display: 'inline-block' }}>STARPULSE</h1>
         </div>
         <div className="flex items-center justify-center gap-6 mb-16">
-           <div className="h-px w-20 bg-orange-500/20"></div>
-           <p className="text-zinc-800 font-black text-[12px] uppercase tracking-[1.2em] italic">Authority Neural Bio-Archive // v6.5 Master</p>
-           <div className="h-px w-20 bg-orange-500/20"></div>
+          <div className="h-px w-20 bg-orange-500/20"></div>
+          <p className="text-zinc-800 font-black text-[12px] uppercase tracking-[1.2em] italic">Authority Neural Bio-Archive // v6.5 Master</p>
+          <div className="h-px w-20 bg-orange-500/20"></div>
         </div>
         <div ref={searchContainerRef} className="relative max-w-3xl mx-auto group">
           <form onSubmit={handleSearchSubmit} className="relative">
@@ -442,25 +442,31 @@ const App: React.FC = () => {
               {suggestions.map((s, idx) => (<div key={idx} onClick={() => performSearch(s)} className="px-12 py-8 hover:bg-orange-500 hover:text-black cursor-pointer transition-all border-b border-white/5 last:border-0 font-black text-3xl italic uppercase tracking-tighter rounded-3xl">{s}</div>))}
             </div>
           )}
+
+          {error && (
+            <div className="absolute top-full left-0 right-0 mt-8 bg-red-500/10 border border-red-500/50 text-red-500 p-6 rounded-3xl text-center font-bold tracking-wider backdrop-blur-md animate-in fade-in slide-in-from-top-4">
+              ERROR: {error}
+            </div>
+          )}
         </div>
       </div>
 
       {loading && (
         <div className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-black/95 backdrop-blur-xl overflow-hidden">
-           <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] z-[210]"></div>
-           <div className="w-full max-w-3xl px-12 text-center flex flex-col items-center relative z-[220]">
-              <div className="text-orange-500 font-black text-5xl md:text-7xl tracking-tighter italic mb-16 uppercase animate-pulse leading-tight drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]">Syncing Neural<br/>Database</div>
-              <div className="w-full h-1.5 bg-zinc-900 rounded-full overflow-hidden relative shadow-2xl mb-8 border border-white/5">
-                 <div className="h-full bg-orange-500 transition-all duration-300 ease-out shadow-[0_0_25px_#f97316]" style={{ width: `${loadingProgress}%` }}></div>
-              </div>
-              <div className="flex justify-between items-center w-full px-2 mb-20">
-                <div className="text-orange-500/40 font-black text-[10px] uppercase tracking-[0.4em] italic">Authority Verification // {Math.floor(loadingProgress * 1234)}</div>
-                <div className="text-orange-500 font-mono text-xl font-black">{Math.round(loadingProgress)}%</div>
-              </div>
-              <button onClick={cancelSearch} className="group relative px-10 py-4 bg-zinc-950 border border-white/5 rounded-full hover:border-orange-500 transition-all active:scale-95 overflow-hidden shadow-2xl">
-                <span className="text-zinc-600 group-hover:text-orange-500 font-black uppercase text-[12px] tracking-[0.3em] italic transition-colors relative z-10">Cancel Uplink</span>
-              </button>
-           </div>
+          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] z-[210]"></div>
+          <div className="w-full max-w-3xl px-12 text-center flex flex-col items-center relative z-[220]">
+            <div className="text-orange-500 font-black text-5xl md:text-7xl tracking-tighter italic mb-16 uppercase animate-pulse leading-tight drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]">Syncing Neural<br />Database</div>
+            <div className="w-full h-1.5 bg-zinc-900 rounded-full overflow-hidden relative shadow-2xl mb-8 border border-white/5">
+              <div className="h-full bg-orange-500 transition-all duration-300 ease-out shadow-[0_0_25px_#f97316]" style={{ width: `${loadingProgress}%` }}></div>
+            </div>
+            <div className="flex justify-between items-center w-full px-2 mb-20">
+              <div className="text-orange-500/40 font-black text-[10px] uppercase tracking-[0.4em] italic">Authority Verification // {Math.floor(loadingProgress * 1234)}</div>
+              <div className="text-orange-500 font-mono text-xl font-black">{Math.round(loadingProgress)}%</div>
+            </div>
+            <button onClick={cancelSearch} className="group relative px-10 py-4 bg-zinc-950 border border-white/5 rounded-full hover:border-orange-500 transition-all active:scale-95 overflow-hidden shadow-2xl">
+              <span className="text-zinc-600 group-hover:text-orange-500 font-black uppercase text-[12px] tracking-[0.3em] italic transition-colors relative z-10">Cancel Uplink</span>
+            </button>
+          </div>
         </div>
       )}
 
@@ -476,18 +482,18 @@ const App: React.FC = () => {
             <InfoCard title="相關藝人 / RELATED" onClick={() => openDetail('related', '相關藝人 / RELATED')}>{renderRelatedArtists(data.relatedCelebrities, false)}</InfoCard>
           </div>
           <div className="lg:col-span-6 space-y-12">
-            <InfoCard title="主頁資訊 / PRIMARY HERO" onClick={() => {}} className="relative aspect-[16/11] bg-zinc-950 border-2 border-orange-500/20 rounded-[5rem] flex flex-col items-center justify-center p-16 shadow-[0_50px_100px_rgba(0,0,0,0.8)] cursor-default overflow-hidden" showExpandIcon={false}>
-               <div className="relative z-10 text-center w-full max-w-full">
-                  {renderNameInHero(data)}
-                  <div className="flex flex-wrap justify-center gap-6 mt-16">
-                    {data.tags.map((tag, i) => (<span key={i} className="text-[12px] font-black uppercase tracking-[0.3em] text-black bg-orange-500 px-12 py-4 rounded-full shadow-2xl">{tag}</span>))}
-                  </div>
-               </div>
+            <InfoCard title="主頁資訊 / PRIMARY HERO" onClick={() => { }} className="relative aspect-[16/11] bg-zinc-950 border-2 border-orange-500/20 rounded-[5rem] flex flex-col items-center justify-center p-16 shadow-[0_50px_100px_rgba(0,0,0,0.8)] cursor-default overflow-hidden" showExpandIcon={false}>
+              <div className="relative z-10 text-center w-full max-w-full">
+                {renderNameInHero(data)}
+                <div className="flex flex-wrap justify-center gap-6 mt-16">
+                  {data.tags.map((tag, i) => (<span key={i} className="text-[12px] font-black uppercase tracking-[0.3em] text-black bg-orange-500 px-12 py-4 rounded-full shadow-2xl">{tag}</span>))}
+                </div>
+              </div>
             </InfoCard>
             <InfoCard title="生涯故事 / CAREER STORY" onClick={() => openDetail('story', '生涯故事 / CAREER STORY')}><p className="text-zinc-300 leading-relaxed line-clamp-[12] text-2xl font-medium italic">{data.careerStory}</p></InfoCard>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {Object.entries(data.totalStats).map(([key, val]) => val && (
-                <InfoCard key={key} title="" onClick={() => {}} className="p-10 rounded-[2.5rem] text-center bg-zinc-950/50 hover:border-orange-500 cursor-default" showExpandIcon={false}><div className="text-zinc-800 text-[10px] font-black uppercase mb-3 tracking-[0.5em]">{key}</div><div className="text-orange-500 font-black text-xl uppercase italic tracking-tighter">{val}</div></InfoCard>
+                <InfoCard key={key} title="" onClick={() => { }} className="p-10 rounded-[2.5rem] text-center bg-zinc-950/50 hover:border-orange-500 cursor-default" showExpandIcon={false}><div className="text-zinc-800 text-[10px] font-black uppercase mb-3 tracking-[0.5em]">{key}</div><div className="text-orange-500 font-black text-xl uppercase italic tracking-tighter">{val}</div></InfoCard>
               ))}
             </div>
             <InfoCard title="成長背景 / ORIGIN" onClick={() => openDetail('growth', '成長背景 / ORIGIN')}><p className="text-zinc-500 leading-relaxed italic text-base font-medium">{data.growthBackground}</p></InfoCard>
@@ -499,7 +505,7 @@ const App: React.FC = () => {
                 {data.famousWorks.map((f, i) => (
                   <a key={i} href={f.youtubeUrl} target="_blank" onClick={(e) => e.stopPropagation()} className="flex items-center justify-between bg-black/60 p-6 rounded-3xl border border-orange-500/10 hover:border-orange-500 group transition-all shadow-2xl">
                     <span className="font-black text-sm text-zinc-400 group-hover:text-white truncate pr-6 uppercase italic">{f.title}</span>
-                    <div className="w-12 h-12 rounded-full bg-zinc-900 flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-all shadow-2xl"><svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></div>
+                    <div className="w-12 h-12 rounded-full bg-zinc-900 flex items-center justify-center text-red-600 group-hover:bg-red-600 group-hover:text-white transition-all shadow-2xl"><svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" /></svg></div>
                   </a>
                 ))}
               </div>
