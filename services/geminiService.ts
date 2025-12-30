@@ -12,7 +12,7 @@ export const getSuggestions = async (partialName: string): Promise<string[]> => 
 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flash-lite-preview-02-05",
+    model: "gemini-flash-latest",
     generationConfig: {
       responseMimeType: "application/json",
       responseSchema: {
@@ -39,7 +39,7 @@ export const fetchCelebrityData = async (name: string): Promise<CelebrityData> =
 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flash-lite-preview-02-05",
+    model: "gemini-flash-latest",
     systemInstruction: "你是一個冷酷、極度嚴苛、排除區域濾鏡的全球數據分析師。你對知名度的定義是『全球跨語系的絕對滲透率』。你視區域性知名度為地方性數據，不計入全球權威指數。對於作品效率低的藝人，你給分極其刻薄。回傳格式必須為 JSON。",
     generationConfig: {
       responseMimeType: "application/json",
@@ -173,7 +173,7 @@ export const fetchCelebrityData = async (name: string): Promise<CelebrityData> =
       // Actually, listModels is not on the client instance in this SDK, 
       // it might not be directly available or requires a different manager.
       // Let's print a helpful message instead since verify model is internal.
-      console.log("Suggestion: Verify that your API key is valid and the model is enabled in Google AI Studio.");
+      console.log("Suggestion: Check Google AI Studio for enabled models. Current request: gemini-flash-latest");
     } catch (listErr) {
       console.error("Failed to list models", listErr);
     }
