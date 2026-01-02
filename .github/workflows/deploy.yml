@@ -26,7 +26,7 @@ jobs:
       - name: Build
         env:
           # 建置時注入環境變數，Vite 會將其打包進程式碼中
-          VITE_GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          VITE_GEMINI_API_KEY: ${{ secrets.STARPULSE }}
         run: npm run build
 
       - name: Deploy
